@@ -23,7 +23,6 @@
              (provided
               (seqsy-print [[:a] [1] [2]]) => :fake))
 
-
        (fact "missing keys are printed as nil."
              (seqsy-table [{:a 1 :b 2} {:a 1 :c 3}] [:a :b :c]) => :fake
              (provided

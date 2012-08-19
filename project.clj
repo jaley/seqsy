@@ -1,4 +1,4 @@
-(defproject seqsy "0.1.0"
+(defproject seqsy "0.2.0"
   :description "Some utilities for printing structures of seqs readably. Tables."
   :url "http://github.com/jaley/seqsy"
   :license {:name "Eclipse Public License"
