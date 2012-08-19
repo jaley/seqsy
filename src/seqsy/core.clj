@@ -1,6 +1,7 @@
 (ns seqsy.core
   "Function(s) for printing seqs readably at the REPL."
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [clojure.set    :as set]))
 
 (defn columns
   "If seqs is 2-dimensional, return a sequence of what should
@@ -36,3 +37,15 @@
     (doseq [row seq-o-seqs]
       (println (pad-row row widths)))))
 
+(defn make-getter
+  "Given a value, returns a function that gets it from a map."
+  [val]
+  (fn [m] (get m val "nil")))
+
+(defn seqsy-table
+  "Given a sequence of maps, convert to a seqsy-printed table."
+  ([seq-o-maps]
+     (seqsy-table seq-o-maps (apply set/union (map (comp set keys) seq-o-maps))))
+  ([seq-o-maps headings]
+     (seqsy-print (concat [headings]
+                          (map (apply juxt (map make-getter headings)) seq-o-maps)))))
